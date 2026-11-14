@@ -13,7 +13,7 @@
 
 ## 开发和运行环境
 
-- DevEco Studio 6.1.1，HarmonyOS SDK 6.1.1(24)，Stage 模型，ArkTS/ArkUI。
+- DevEco Studio 6.1.1，目标 HarmonyOS SDK 6.1.1(24)，最低兼容 HarmonyOS 6.1.0(23)，Stage 模型，ArkTS/ArkUI。
 - 在 DevEco Studio 中打开工程根目录，等待依赖同步，选择 `entry`，启动手机模拟器或连接 HarmonyOS 设备并运行。
 - **工程所在的完整路径应只含英文字母、数字等 DevEco 支持的字符。** 当前工作目录含中文，DevEco 的 Hvigor 会拒绝该路径；请从 GitHub 克隆到例如 `D:\HarmonyProjects\susheAPP` 后打开。
 - 首次运行显示默认规则与场景。进入“环境”加载预设场景或改变数据；在“总览”观察设备；在“日志”查看命中条件和冲突原因。进入“规则”可编辑或新建规则。
@@ -26,7 +26,16 @@
 hvigorw test -p module=entry -p coverage=false
 ```
 
-2026 年 11 月 14 日，本机 DevEco Studio 6.1.1 的实际测试结果为 **Tests run: 9, Failure: 0, Error: 0, Pass: 9**；原始结果见 `evidence/test-result.txt`。本机已成功执行 `assembleHap`，生成未签名 HAP。**界面、模拟器操作、进程重启恢复及演示录屏尚需设备实测**，不能以编译或单元测试代替。
+2026 年 11 月 14 日，本机 DevEco Studio 6.1.1 的实际测试结果为 **Tests run: 9, Failure: 0, Error: 0, Pass: 9**；原始结果见 `evidence/test-result.txt`。本机已成功执行 `assembleHap`，生成未签名 HAP。应用已安装到 HarmonyOS 6.1.0(23) 模拟器：加载白天场景后，空调和加湿器启动；温度调整后页面立即刷新；结束应用进程并重新启动后，设备状态、环境数值及日志恢复。具体步骤和截图见 `evidence/实际运行记录.md`。实际模拟器录屏为 `evidence/运行录屏.mp4`，因体积较大作为本地交付文件提供。
+
+## 实际运行截图
+
+- [环境调整与场景](evidence/environment-verified.jpeg)
+- [规则列表及双条件规则](evidence/rules.jpeg)
+- [规则执行日志](evidence/logs.jpeg)
+- [重启前设备状态](evidence/recovery-before.jpeg)
+- [重启后设备状态](evidence/recovery-after.jpeg)
+- [重启后环境数值](evidence/recovery-environment.jpeg)
 
 ## 完整演示脚本
 
@@ -56,4 +65,5 @@ hvigorw test -p module=entry -p coverage=false
 
 ## 提交核对
 
-个人报告、仓库链接和本人 GitHub 账号名称需按课程要求提交；学习通答案处必须同时填写有效仓库链接与账号名称。运行截图、录屏、真实进程恢复记录和报告中的个人经历应取自实际执行，不能由代码推断或虚构。
+个人报告、仓库链接和本人 GitHub 账号名称需按课程要求提交；学习通答案处必须同时填写有效仓库链接与账号名称。仓库地址为 `https://github.com/Yu-jy123/susheAPP`，账号名称为 `Yu-jy123`。提交前请核对报告中的个人信息与个人总结，并将本地录屏文件一并提供给评阅教师。
+

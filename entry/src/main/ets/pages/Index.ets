@@ -12,6 +12,9 @@ const DEVICE_NAMES: string[] = ['照明', '空调', '窗帘', '加湿器'];
 @Component
 struct Index {
   @State private state: AutomationState = defaultState();
+  @State private temperature: number = 26;
+  @State private humidity: number = 45;
+  @State private light: number = 500;
   @State private tab: number = 0;
   @State private notice: string = '准备就绪';
   @State private editorId: string = '';
@@ -43,10 +46,16 @@ struct Index {
         });
       }
     }
+    this.temperature = this.state.environment.temperature;
+    this.humidity = this.state.environment.humidity;
+    this.light = this.state.environment.light;
   }
 
   private refresh(): void {
     this.state = JSON.parse(JSON.stringify(this.state)) as AutomationState;
+    this.temperature = this.state.environment.temperature;
+    this.humidity = this.state.environment.humidity;
+    this.light = this.state.environment.light;
     if (this.store !== null) {
       this.store.save(this.state).catch((error: Error) => {
         this.notice = '保存失败：' + String(error);
@@ -56,7 +65,9 @@ struct Index {
 
   private simulate(): void {
     try {
+      let runId: number = this.state.nextId++;
       let result = evaluate(this.state, new Date().toLocaleString());
+      result.logs.forEach((log: ExecutionLog) => log.id += '-' + runId);
       this.state.devices = result.devices;
       this.state.logs = result.logs.concat(this.state.logs).slice(0, 100);
       this.notice = '已计算 ' + result.logs.length + ' 条执行记录';
@@ -201,11 +212,13 @@ struct Index {
   }
 
   @Builder
-  private metric(label: string, field: string, value: number, step: number): void {
+  private metric(label: string, field: string, step: number): void {
     Row() {
       Column() {
         Text(label).fontSize(13).fontColor('#60718A');
-        Text(String(value)).fontSize(24).fontWeight(FontWeight.Bold).fontColor('#15243A');
+        Text(field === 'temperature' ? String(this.temperature) :
+          field === 'humidity' ? String(this.humidity) : String(this.light))
+          .fontSize(24).fontWeight(FontWeight.Bold).fontColor('#15243A');
       }.alignItems(HorizontalAlign.Start).layoutWeight(1);
       Button('−').onClick(() => this.changeEnvironment(field, -step));
       Button('+').onClick(() => this.changeEnvironment(field, step)).margin({ left: 8 });
@@ -215,10 +228,14 @@ struct Index {
   @Builder
   private navigation(): void {
     Row() {
-      Button('总览').onClick(() => this.tab = 0).backgroundColor(this.tab === 0 ? '#2365D1' : '#E8EEF8');
-      Button('环境').onClick(() => this.tab = 1).backgroundColor(this.tab === 1 ? '#2365D1' : '#E8EEF8');
-      Button('规则').onClick(() => this.tab = 2).backgroundColor(this.tab === 2 ? '#2365D1' : '#E8EEF8');
-      Button('日志').onClick(() => this.tab = 3).backgroundColor(this.tab === 3 ? '#2365D1' : '#E8EEF8');
+      Button('总览').onClick(() => this.tab = 0).backgroundColor(this.tab === 0 ? '#2365D1' : '#E8EEF8')
+        .fontColor(this.tab === 0 ? '#FFFFFF' : '#32445E');
+      Button('环境').onClick(() => this.tab = 1).backgroundColor(this.tab === 1 ? '#2365D1' : '#E8EEF8')
+        .fontColor(this.tab === 1 ? '#FFFFFF' : '#32445E');
+      Button('规则').onClick(() => this.tab = 2).backgroundColor(this.tab === 2 ? '#2365D1' : '#E8EEF8')
+        .fontColor(this.tab === 2 ? '#FFFFFF' : '#32445E');
+      Button('日志').onClick(() => this.tab = 3).backgroundColor(this.tab === 3 ? '#2365D1' : '#E8EEF8')
+        .fontColor(this.tab === 3 ? '#FFFFFF' : '#32445E');
     }.justifyContent(FlexAlign.SpaceBetween).width('100%').margin({ top: 16, bottom: 14 });
   }
 
@@ -234,7 +251,7 @@ struct Index {
           }.alignItems(HorizontalAlign.Start).layoutWeight(1);
           Button(device.on ? '关闭' : '开启').onClick(() => this.toggleDevice(device.id));
         }.width('100%').padding(14).backgroundColor('#FFFFFF').borderRadius(14);
-      }, (device: Device) => device.id);
+      }, (device: Device) => device.id + '-' + String(device.on));
       Text('最近执行').fontSize(20).fontWeight(FontWeight.Bold).width('100%').margin({ top: 10 });
       Text(this.state.logs.length ? this.state.logs[0].message : '调整环境或加载场景后，这里会显示执行结果。')
         .fontSize(14).fontColor('#42536B').width('100%').padding(16).backgroundColor('#FFFFFF').borderRadius(14);
@@ -246,9 +263,9 @@ struct Index {
   private environmentPanel(): void {
     Column() {
       Text('模拟环境').fontSize(20).fontWeight(FontWeight.Bold).width('100%').margin({ bottom: 12 });
-      this.metric('温度 °C', 'temperature', this.state.environment.temperature, 1);
-      this.metric('湿度 %', 'humidity', this.state.environment.humidity, 5);
-      this.metric('光照 lx', 'light', this.state.environment.light, 50);
+      this.metric('温度 °C', 'temperature', 1);
+      this.metric('湿度 %', 'humidity', 5);
+      this.metric('光照 lx', 'light', 50);
       Text('场景演练').fontSize(20).fontWeight(FontWeight.Bold).width('100%').margin({ top: 16, bottom: 10 });
       ForEach(this.state.scenarios, (scenario: Scenario) => {
         Row() {
@@ -292,7 +309,7 @@ struct Index {
           }.width('100%');
         }.alignItems(HorizontalAlign.Start).width('100%').padding(14)
           .backgroundColor('#FFFFFF').borderRadius(14).margin({ bottom: 8 });
-      }, (rule: Rule) => rule.id);
+      }, (rule: Rule) => JSON.stringify(rule));
       Text(this.editorId ? '编辑规则 ' + this.editorId : '新建规则')
         .fontSize(18).fontWeight(FontWeight.Bold).width('100%').margin({ top: 16, bottom: 10 });
       TextInput({ placeholder: '规则名称', text: this.ruleName })
@@ -363,3 +380,4 @@ struct Index {
     }.width('100%').height('100%').backgroundColor('#F2F5FA');
   }
 }
+
