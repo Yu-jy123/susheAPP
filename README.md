@@ -34,8 +34,8 @@
 - [重启后设备状态](evidence/recovery-after.jpeg)
 - [重启后环境数值](evidence/recovery-environment.jpeg)
 
-实际模拟器录屏链接
-<video src="./evidence/2026-11-14.212020.mp4" controls width="720"></video>
+实际模拟器录屏
+<video src="https://github.com/Yu-jy123/susheAPP/releases/download/xxx/2026-11-14.212020.mp4" controls width="720">
 
 
 ## 完整演示脚本
