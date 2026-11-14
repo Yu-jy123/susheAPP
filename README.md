@@ -35,9 +35,8 @@
 - [重启后环境数值](evidence/recovery-environment.jpeg)
 
 ## 演示录屏
-> 在线预览：点击链接跳转查看视频（页面自带播放器）
-[宿舍联控台演示录屏在线播放页](https://github.com/Yu-jy123/susheAPP/issues/1#issue-6390657608)
-
+点击链接跳转查看视频
+sha256:55cc2030d855d2f792396d6fb8e49b9836116d442e5f18c03c1b10c806e5acf1
 
 ## 完整演示脚本
 
