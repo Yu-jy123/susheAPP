@@ -35,9 +35,10 @@
 - [重启后环境数值](evidence/recovery-environment.jpeg)
 
 ## 演示录屏
-> 完整演示视频（20.8MB，归档存放于Release，点击链接下载观看）
-[宿舍联控台演示录屏.mp4](https://github.com/Yu-jy123/susheAPP/releases/download/录屏/2026-11-14.212020.mp4)
+完整演示视频（20.8MB，归档存放于Release，点击链接下载观看）
+[宿舍联控台演示录屏.mp4](在这里粘贴你右键复制的mp4直链)
 > 文件SHA256校验值：55cc2030d855d2f792396d6fb8e49b9836116d442e5f18c03c1b10c806e5acf1
+
 
 
 ## 完整演示脚本
