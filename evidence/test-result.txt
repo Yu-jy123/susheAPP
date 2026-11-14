@@ -1,0 +1,20 @@
+class=DormAutomationRuleEngine
+test=normal_hot_and_dry_changes_two_devices
+result=Success
+test=normal_two_conditions_must_both_match
+result=Success
+test=boundary_equality_is_inclusive_only_for_greater_equal
+result=Success
+test=conflict_higher_priority_wins_and_logs_skipped_action
+result=Success
+test=conflict_equal_priority_uses_rule_id
+result=Success
+test=boundary_environment_limits_are_valid
+result=Success
+test=exception_out_of_range_environment_is_rejected
+result=Success
+test=exception_invalid_rule_is_rejected
+result=Success
+test=recovery_valid_state_round_trip_and_corruption_fails
+result=Success
+Tests run: 9, Failure: 0, Error: 0, Pass: 9, Ignore: 0
