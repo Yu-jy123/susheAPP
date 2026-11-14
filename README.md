@@ -34,8 +34,9 @@
 - [重启后设备状态](evidence/recovery-after.jpeg)
 - [重启后环境数值](evidence/recovery-environment.jpeg)
 
-实际模拟器录屏
-<video src="https://github.com/Yu-jy123/susheAPP/releases/download/xxx/2026-11-14.212020.mp4" controls width="720">
+## 演示录屏
+> 在线预览：点击链接跳转查看视频（页面自带播放器）
+[宿舍联控台演示录屏在线播放页](https://github.com/Yu-jy123/susheAPP/issues/1#issue-6390657608)
 
 
 ## 完整演示脚本
