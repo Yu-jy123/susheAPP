@@ -22,9 +22,10 @@
 
 `entry/src/test/RuleEngine.test.ets` 包含 9 条本地测试，覆盖正常、双条件、阈值边界、冲突优先级、相同优先级排序、越界环境、无效规则和损坏存档。依赖同步后，在 DevEco Studio 中运行 `entry/src/test` 的本地测试；本次运行使用了 DevEco 自带的 Hvigor，构建与测试日志保存在 `evidence` 目录。
 
-2026 年 11 月 14 日，本机 DevEco Studio 6.1.1 的实际测试结果为 **Tests run: 9, Failure: 0, Error: 0, Pass: 9**；原始结果见 `evidence/test-result.txt`。本机已成功执行 `assembleHap`，生成未签名 HAP。应用已安装到 HarmonyOS 6.1.0(23) 模拟器：加载白天场景后，空调和加湿器启动；温度调整后页面立即刷新；结束应用进程并重新启动后，设备状态、环境数值及日志恢复。具体步骤和截图见 `evidence/实际运行记录.md`。实际模拟器录屏作为本地附件单独交付，不存放在 GitHub 仓库中。
+2026 年 11 月 14 日，本机 DevEco Studio 6.1.1 的实际测试结果为 **Tests run: 9, Failure: 0, Error: 0, Pass: 9**；原始结果见 `evidence/test-result.txt`。本机已成功执行 `assembleHap`，生成未签名 HAP。应用已安装到 HarmonyOS 6.1.0(23) 模拟器：加载白天场景后，空调和加湿器启动；温度调整后页面立即刷新；结束应用进程并重新启动后，设备状态、环境数值及日志恢复。具体步骤和截图见 `evidence/实际运行记录.md`。
 
-## 实际运行截图
+
+## 实际运行截图和录屏
 
 - [环境调整与场景](evidence/environment-verified.jpeg)
 - [规则列表及双条件规则](evidence/rules.jpeg)
@@ -32,7 +33,8 @@
 - [重启前设备状态](evidence/recovery-before.jpeg)
 - [重启后设备状态](evidence/recovery-after.jpeg)
 - [重启后环境数值](evidence/recovery-environment.jpeg)
-
+实际模拟器录屏链接
+sha256:55cc2030d855d2f792396d6fb8e49b9836116d442e5f18c03c1b10c806e5acf1
 ## 完整演示脚本
 
 1. 加载“炎热干燥的白天”，检查空调、加湿器及日志。
