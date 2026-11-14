@@ -33,8 +33,11 @@
 - [重启前设备状态](evidence/recovery-before.jpeg)
 - [重启后设备状态](evidence/recovery-after.jpeg)
 - [重启后环境数值](evidence/recovery-environment.jpeg)
+
 实际模拟器录屏链接
-sha256:55cc2030d855d2f792396d6fb8e49b9836116d442e5f18c03c1b10c806e5acf1
+<video src="./evidence/2026-11-14.212020.mp4" controls width="720"></video>
+
+
 ## 完整演示脚本
 
 1. 加载“炎热干燥的白天”，检查空调、加湿器及日志。
